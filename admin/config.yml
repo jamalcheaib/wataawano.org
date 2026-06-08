@@ -1,0 +1,81 @@
+# =====================================================================
+#  Decap CMS — إعدادات جمعية وتعاونوا
+#  لتفعيل اللوحة:
+#  1. أنشئ مستودعاً على GitHub وارفع ملفات المشروع إليه.
+#  2. عدّل قيمة "repo" أدناه باسم مستخدمك ومستودعك.
+#  3. فعّل Netlify Identity على موقعك في Netlify Dashboard.
+#  4. افتح yourdomain.com/admin/ وسجّل دخولك.
+# =====================================================================
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/wataawano   # ← عدّل هذا
+  branch: main
+
+# لاستخدام اللوحة محلياً بدون GitHub (للاختبار فقط):
+# local_backend: true
+
+media_folder: "images"
+public_folder: "/images"
+
+locale: ar
+
+collections:
+  - name: site_content
+    label: محتوى الموقع
+    files:
+
+      # ─── الأثر / الإحصاءات ──────────────────────────────────────
+      - name: impact
+        label: "📊 أرقام الأثر"
+        file: content.json
+        format: json
+        fields:
+          - label: "أرقام الأثر"
+            name: impact
+            widget: object
+            fields:
+              - { label: "العدد الأول (رقم)", name: stat1_count, widget: number, value_type: int }
+              - { label: "وصف العدد الأول", name: stat1_label, widget: string }
+              - { label: "العدد الثاني (رقم)", name: stat2_count, widget: number, value_type: int }
+              - { label: "وصف العدد الثاني", name: stat2_label, widget: string }
+              - { label: "العدد الثالث (رقم)", name: stat3_count, widget: number, value_type: int }
+              - { label: "وصف العدد الثالث", name: stat3_label, widget: string }
+              - { label: "النص الرابع (مثلاً: كل لبنان)", name: stat4_text, widget: string }
+              - { label: "وصف الإحصاء الرابع", name: stat4_label, widget: string }
+          - label: "قسم التبرّع"
+            name: donate
+            widget: object
+            fields:
+              - { label: "رقم الهاتف الرئيسي", name: phone, widget: string }
+              - { label: "بيانات التحويل المصرفي / IBAN", name: iban_details, widget: string, required: false, hint: "اسم الحساب ورقم الـ IBAN" }
+              - { label: "بيانات OMT / Whish Money", name: omt_details, widget: string, required: false }
+              - { label: "أرقام هاتف إضافية", name: extra_phones, widget: string, required: false }
+          - label: "التواصل"
+            name: contact
+            widget: object
+            fields:
+              - { label: "رقم الهاتف الرئيسي", name: phone, widget: string }
+              - { label: "أرقام هاتف إضافية", name: extra_phones, widget: string, required: false }
+              - { label: "البريد الإلكتروني", name: email, widget: string }
+              - { label: "العنوان", name: address, widget: string, required: false }
+          - label: "التواصل الاجتماعي"
+            name: social
+            widget: object
+            fields:
+              - { label: "فيسبوك (رابط)", name: facebook, widget: string, required: false }
+              - { label: "انستغرام (رابط)", name: instagram, widget: string, required: false }
+              - { label: "X / تويتر (رابط)", name: twitter, widget: string, required: false }
+              - { label: "يوتيوب (رابط)", name: youtube, widget: string, required: false }
+              - { label: "واتساب (رابط كامل)", name: whatsapp, widget: string, required: false, hint: "مثال: https://wa.me/96170826533" }
+          - label: "الأخبار والبيانات"
+            name: news
+            widget: list
+            label_singular: "بطاقة خبر"
+            max: 6
+            fields:
+              - { label: "النوع (حملة / تقرير / بيان / خبر)", name: type, widget: string }
+              - { label: "التاريخ", name: date, widget: string, required: false }
+              - { label: "العنوان", name: title, widget: string }
+              - { label: "المقتطف", name: body, widget: text }
+              - { label: "الرابط", name: link, widget: string, required: false, default: "#" }
