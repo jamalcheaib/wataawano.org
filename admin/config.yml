@@ -8,8 +8,7 @@
 # =====================================================================
 
 backend:
-  name: github
-  repo: YOUR_GITHUB_USERNAME/wataawano   # ← عدّل هذا
+  name: git-gateway
   branch: main
 
 # لاستخدام اللوحة محلياً بدون GitHub (للاختبار فقط):
